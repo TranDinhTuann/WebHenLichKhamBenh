@@ -1,6 +1,11 @@
 // const { render } = require("ejs")
-// import db from '..models/index';
-import db from "../models";
+// import db from '..models/index'; '' bị sai
+import db from "../models/index";
+import CRUDService from "../services/CRUDService";
+
+let getDemoPage = (req, res) => {
+    return res.render('test/demo.ejs');
+}
 
 let getHomePage = async (req, res) => {
     // return res.send('Hello world from controller')
@@ -9,6 +14,7 @@ let getHomePage = async (req, res) => {
         // console.log('-----------------');
         // console.log(data);
         // console.log('-----------------');
+        // vì file này tự chạy đến url/views rồi
         return res.render('homePage.ejs', {
             data: JSON.stringify(data)
         });
@@ -17,15 +23,19 @@ let getHomePage = async (req, res) => {
     }
 }
 
-let getAboutPage = (req, res) => {
-    return res.render('test/about.ejs');
+let getCRUD = (req, res) => {
+    return res.render('crud.ejs');
 }
 
-// object: {
-//     key: '',
-//     value: ''
-// }
+let postCRUD = async (req, res) => {
+    // console.log(req.body);
+    let message = await CRUDService.createNewUser(req.body); // lấy dữ liệu người dùng nhập
+    console.log(message);
+    return res.send('post curd');
+}
 module.exports = {
+    getDemoPage: getDemoPage,
     getHomePage: getHomePage,
-    getAboutPage: getAboutPage
+    getCRUD: getCRUD,
+    postCRUD: postCRUD,
 }

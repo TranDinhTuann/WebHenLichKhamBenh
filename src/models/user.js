@@ -14,12 +14,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
+    // id: DataTypes.INTEGER, ko cần id
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    email: DataTypes.STRING
+    address: DataTypes.STRING,
+    phoneNumber: DataTypes.STRING,
+    gender: DataTypes.BOOLEAN,
+    image: DataTypes.STRING,
+    roleId: DataTypes.STRING,
+    positionId: DataTypes.STRING,
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'User', // User bên kia phải lấy từ đây
   });
   return User;
 };
